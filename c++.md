@@ -4,7 +4,8 @@
 1. **Encapsulation:** The bundling of data (variables) and methods (functions) that operate on that data into a single unit (class), while restricting access to some details (using access specifiers like `private`).
 2. **Abstraction:** Hiding complex implementation details and showing only the necessary features of an object. (e.g., using a TV remote without knowing how the circuit board works).
 3. **Inheritance:** The mechanism where a new class (derived class) acquires the properties and behaviors of an existing class (base class), promoting code reuse.
-4. **Polymorphism:** The ability of a message or function to be displayed in more than one form. It allows objects of different classes to be treated as objects of a common superclass (e.g., function overloading and overriding).
+4. **Polymorphism:** Polymorphism allows the same method call to behave differently depending on the object type at runtime.
+
 
 ## 2. What is the difference between a class and an object in C++?
 * **Class:** A user-defined data type that acts as a blueprint or template. It defines the structure (attributes) and behavior (methods) but does not occupy memory (until instantiated).
