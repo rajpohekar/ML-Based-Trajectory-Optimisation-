@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3D UAV Trajectory Optimization</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <h1>3D UAV Trajectory Optimization for 5G Communication</h1>
+        <div class="status-pill"><span></span> DDQN Relay Model</div>
+      </header>
+
+      <section class="dashboard-grid">
+        <section class="scene-panel panel">
+          <canvas id="scene3d"></canvas>
+          <div class="legend">
+            <div><i class="base"></i>Base Station</div>
+            <div><i class="user"></i>Users</div>
+            <div><i class="path"></i>UAV Trajectory</div>
+            <div><i class="uav"></i>UAV Current</div>
+            <div><i class="los"></i>LoS Link</div>
+            <div><i class="nlos"></i>NLoS Link</div>
+          </div>
+          <div class="scene-readout">
+            <div>Time Step: <strong id="stepText">0 / 80</strong></div>
+            <div>UAV Position: <strong id="posText">-</strong></div>
+            <div>Altitude: <strong id="altText">-</strong></div>
+          </div>
+          <div class="colorbar">
+            <span>Signal Power (dBm)</span>
+            <div></div>
+            <em>-35</em><em>-120</em>
+          </div>
+        </section>
+
+        <aside class="side-stack">
+          <section class="panel center-panel">
+            <h2>Wireless Links</h2>
+            <div class="donut-wrap">
+              <canvas id="losDonut" width="170" height="170"></canvas>
+              <div class="donut-label"><strong id="losPct">0%</strong><span id="losText">0 / 60</span></div>
+            </div>
+            <div class="split-legend">
+              <span><i class="green"></i>LoS <b id="losCount">0</b></span>
+              <span><i class="orange"></i>NLoS <b id="nlosCount">0</b></span>
+            </div>
+          </section>
+
+          <section class="panel metric-panel">
+            <h2>Channel & Performance</h2>
+            <dl>
+              <dt>Avg. SINR</dt><dd id="sinrValue">-</dd>
+              <dt>Avg. Data Rate</dt><dd id="rateValue">-</dd>
+              <dt>Total Throughput</dt><dd id="throughputValue">-</dd>
+              <dt>Avg. Latency</dt><dd id="latencyValue">-</dd>
+              <dt>Coverage Probability</dt><dd id="coverageValue">-</dd>
+              <dt>Fairness Index</dt><dd id="fairnessValue">-</dd>
+              <dt>Backhaul Quality</dt><dd id="backhaulValue">-</dd>
+            </dl>
+          </section>
+
+          <section class="panel energy-panel">
+            <h2>UAV Energy Model</h2>
+            <div class="battery-row">
+              <div class="battery"><span id="batteryFill"></span></div>
+              <div>
+                <p>Battery Remaining <strong id="batteryText">-</strong></p>
+                <div class="progress"><span id="energyBar"></span></div>
+              </div>
+            </div>
+            <dl>
+              <dt>Hover Power</dt><dd class="blue">45.2 W</dd>
+              <dt>Horizontal Power</dt><dd class="orange-text">32.7 W</dd>
+              <dt>Climb Power</dt><dd class="green-text">18.9 W</dd>
+              <dt>Total Power</dt><dd id="totalPower">-</dd>
+            </dl>
+          </section>
+
+          <section class="panel controls-panel">
+            <h2>Simulation Controls</h2>
+            <div class="button-row">
+              <button id="playPause">Pause</button>
+              <button id="resetBtn">Reset</button>
+              <button id="speedBtn">Faster</button>
+              <button id="endBtn">End</button>
+            </div>
+            <dl>
+              <dt>Environment</dt><dd id="envText">400 m x 400 m</dd>
+              <dt>Users</dt><dd>60 live mobile UEs</dd>
+              <dt>Altitude Range</dt><dd>15 m - 120 m</dd>
+              <dt>Mode</dt><dd>Live continuous</dd>
+              <dt>Algorithm</dt><dd>DDQN</dd>
+            </dl>
+          </section>
+        </aside>
+
+        <section class="panel map-panel">
+          <h2>Coverage Probability Map</h2>
+          <canvas id="coverageMap"></canvas>
+        </section>
+
+        <section class="panel mini-scene-panel">
+          <h2>Trajectory Plot</h2>
+          <canvas id="trajectoryMini"></canvas>
+        </section>
+
+        <section class="panel chart-panel">
+          <h2>Altitude Over Time</h2>
+          <canvas id="altitudeChart"></canvas>
+        </section>
+
+        <section class="panel trade-panel">
+          <h2>Trade-off: Coverage vs Energy</h2>
+          <div class="trade-labels"><span>More Energy<br />More Coverage</span><span>Less Energy<br />Less Coverage</span></div>
+          <div class="trade-track"><span id="tradeKnob"></span></div>
+        </section>
+
+        <section class="panel score-panel">
+          <div><span>Cumulative Reward</span><strong id="rewardValue">-</strong></div>
+          <div><span>Epsilon</span><strong id="epsilonValue">-</strong></div>
+        </section>
+      </section>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
